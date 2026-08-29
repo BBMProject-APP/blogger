@@ -1,0 +1,19 @@
+# Environment Variables (SANGAT PENTING: Jangan sampai ke-push API Key & Password)
+.env
+.env.local
+
+# Python Cache & Virtual Environment
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+
+# OS Temp Files
+.DS_Store
+Thumbs.db
