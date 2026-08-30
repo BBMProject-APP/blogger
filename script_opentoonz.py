@@ -15,8 +15,8 @@ load_dotenv()
 # CONFIGURATION & INITIALIZATION
 # ---------------------------------------------------------------------------
 BLOGGER_BLOG_ID = os.getenv("BLOGGER_BLOG_ID", "5691370053604799116")
-TARGET_LABEL = "Pojok Animasi"
-JSON_FILE_PATH = "animation_data.json"
+TARGET_LABEL = "Opentoonz"
+JSON_FILE_PATH = "opentoonz_data.json"
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("VITE_GEMINI_API_KEY")
 if not GEMINI_API_KEY:
@@ -26,8 +26,7 @@ client = genai.Client(api_key=GEMINI_API_KEY)
 
 # Fokus khusus OpenToonz dan Tahoma 2D
 SOFTWARES = [
-    "opentoonz",
-    "tahoma-2d"
+    "opentoonz"
 ]
 
 execution_logs = []
@@ -134,13 +133,13 @@ def format_html_content(excerpt: str, content: str, source_url: str = "") -> str
 # MAIN FEEDER FUNCTION
 # ---------------------------------------------------------------------------
 def feed_tutorials():
-    msg = "📚 [TUTORIAL FEEDER] Mencari & Membuat Tutorial Mendalam (Long-form)..."
+    msg = "📚 [TUTORIAL FEEDER] Mencari & Membuat Tutorial OpenToonz (Long-form)..."
     print(f"\n{msg}")
     execution_logs.append(msg)
     
     for sw in SOFTWARES:
         prompt = f"""
-        Buatlah 1 panduan tutorial tingkat lanjut yang SANGAT DETAIL dan MENDALAM untuk software animasi '{sw}'.
+        Buatlah 1 panduan tutorial tingkat lanjut yang SANGAT DETAIL dan MENDALAM untuk software animasi 2D '{sw}'.
         
         SPESIFIKASI KONTEN (PENTING):
         1. Seluruh isi konten HARUS ditulis dalam BAHASA INDONESIA profesional dan mudah dipahami.
@@ -166,7 +165,6 @@ def feed_tutorials():
         }}
         """
         try:
-            # Panggilan Gemini 3.6 Flash untuk artikel panjang
             response = client.models.generate_content(
                 model="gemini-3.6-flash",
                 contents=prompt,
@@ -179,7 +177,6 @@ def feed_tutorials():
             data = parse_gemini_json(response.text)
             data["createdAt"] = time.strftime("%Y-%m-%d %H:%M:%S")
 
-            # Format ke HTML & Autopost ke Blogger
             html_body = format_html_content(data.get("excerpt", ""), data.get("content", ""), data.get("source_url", ""))
             blogger_url = post_to_blogger(
                 title=data.get("title"),
@@ -203,7 +200,6 @@ def feed_tutorials():
             print(log_item)
             execution_logs.append(log_item)
             
-        # Jeda 20 detik antar request
         time.sleep(20)
 
 # ---------------------------------------------------------------------------

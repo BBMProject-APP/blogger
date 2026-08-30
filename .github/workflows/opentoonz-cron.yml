@@ -1,7 +1,8 @@
-name: Animation Feeder Blogger Automation
+name: OpenToonz Feeder Blogger Automation
 
 on:
   schedule:
+    # Jalan setiap jam 00:00 UTC
     - cron: "0 0 * * *"
   workflow_dispatch:
 
@@ -26,7 +27,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install google-genai google-api-python-client google-auth-oauthlib python-dotenv
 
-      - name: Run Animation Feeder Script
+      - name: Run OpenToonz Feeder Script
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
@@ -36,10 +37,10 @@ jobs:
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: |
-          python animation_feeder.py
+          python script_opentoonz.py
 
       - name: Commit & Push JSON Data
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: update animation data JSON & blogger post logs [auto]"
-          file_pattern: "animation_data.json"
+          commit_message: "chore: update opentoonz data JSON [auto]"
+          file_pattern: "opentoonz_data.json"
