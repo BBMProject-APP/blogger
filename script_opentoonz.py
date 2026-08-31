@@ -139,31 +139,50 @@ def feed_tutorials():
     
     for sw in SOFTWARES:
         prompt = f"""
-        Buatlah 1 panduan tutorial tingkat lanjut yang SANGAT DETAIL dan MENDALAM untuk software animasi 2D '{sw}'.
-        
-        SPESIFIKASI KONTEN (PENTING):
-        1. Seluruh isi konten HARUS ditulis dalam BAHASA INDONESIA profesional dan mudah dipahami.
-        2. Panjang artikel wajib berkisar antara 1200 hingga 1700 KATA (Long-form mega tutorial).
-        3. Struktur artikel harus mencakup:
-           - Pendahuluan & Mengapa Teknik Ini Penting
-           - Persiapan Workspace & Alat (Toolbox)
-           - Panduan Langkah demi Langkah Detail (Sub-heading '### Heading' untuk tiap fase)
-           - Pintasan Keyboard (Shortcuts) Penting
-           - Troubleshooting / Masalah Umum yang Sering Terjadi
-           - Tips Efisiensi Industri & Kesimpulan
-        4. HANYA keluarkan objek JSON mentah tanpa teks pembuka/penutup.
+Bertindaklah sebagai Senior 2D Animator, Tech Educator, dan Specialist Software {sw} berpengalaman yang ramah, komunikatif, dan pandai menjelaskan teknik animasi serta rigging kompleks secara rinci dan mudah dipahami.
 
-        Kembalikan JSON dengan format persis seperti ini:
+TOLONG BUATKAN 1 PANDUAN TUTORIAL ADVANCE / TINGKAT LANJUT SANGAT DETAIL:
+- Topik Utama: Panduan tutorial tingkat lanjut dan mendalam untuk software animasi 2D '{sw}'.
+- Fokus Teknik: Pilih 1 fitur unggulan atau alur kerja kompleks paling populer di {sw} (misalnya rigging advanced, efek khusus, cutout animation, frame-by-frame workflow, atau lip-sync automation).
+- Target Pembaca: Animator 2D, rigger, ilustrator, Konten Kreator atau pegiat digital yang ingin menguasai {sw} tingkat lanjut.
+- Panjang Konten: Wajib berkisar antara 1200 hingga 1700 KATA (Long-form mega tutorial).
 
-        {{
-            "title": "Judul Panduan Lengkap dan Menarik (contoh: Panduan Komprehensif Plastic Tool & Rigging Karakter di OpenToonz)",
-            "softwareId": "{sw}",
-            "category": "Advance Tutorial",
-            "excerpt": "Ringkasan komprehensif 2-3 kalimat yang menjelaskan teknik mendalam yang akan dipelajari.",
-            "content": "Isi panduan lengkap 1200-1700 kata dengan pembagian sub-heading '### Heading' dan paragraf yang jelas.",
-            "source_url": "https://opentoonz.readthedocs.io/"
-        }}
-        """
+ATURAN GAYA PENULISAN & TONE:
+1. Panggilan Diri: Gunakan "Saya" atau "Gua" secara konsisten.
+2. Panggilan Pembaca: Gunakan "Lu" atau "Sob" / "Bro" agar terasa akrab namun tetap berbobot.
+3. Gaya Bahasa: Edukatif, santai, solutif, dan mudah diikuti langkah demi langkah.
+4. JANGAN gunakan kata-kata kaku khas AI seperti: "Di era digital yang berkembang pesat ini", "Sangat krusial", "Kesimpulannya", "Dalam dunia animasi yang dinamis".
+
+ATURAN JUDUL & RINGKASAN:
+1. Judul: Clickable, to the point, memuat kata kunci spesifik software {sw} (Maksimal 7-12 kata).
+2. Excerpt: Ringkasan menarik (2-3 kalimat / 120-150 karakter) yang menjelaskan teknik utama yang akan dipelajari dan manfaat praktisnya.
+
+ATURAN STRUKTUR & FORMAT HTML LENGKAP:
+Pada field 'content', wajib menyusun artikel dalam format HTML yang rapi (JANGAN gunakan Markdown raw). Gunakan tag HTML berikut secara tepat:
+- Tag <h2> dan <h3> untuk struktur section utama dan sub-fase panduan.
+- Tag <p> untuk penjelasan paragraf.
+- Tag <ul>, <ol>, dan <li> untuk daftar langkah atau fitur.
+- Tag <code> atau <kbd> untuk pintasan keyboard (shortcuts) dan nama tool.
+- Tag <blockquote> untuk tips profesional, peringatan penting, atau catatan trik alur kerja.
+
+Struktur Artikel Wajib Memuat:
+1. Pendahuluan & Mengapa Teknik Ini Penting (Alasan animator wajib menguasai alur kerja ini di {sw}).
+2. Persiapan Workspace & Alat / Toolbox (Setup layer, kanvas, atau persiapan node/vector).
+3. Panduan Langkah demi Langkah Detail (Bagi menjadi beberapa fase jelas menggunakan tag <h3>).
+4. Tabel / Daftar Pintasan Keyboard (Shortcuts) Penting di {sw}.
+5. Troubleshooting / Masalah Umum yang Sering Terjadi + Solusinya.
+6. Tips Efisiensi Industri & Penutup.
+
+FORMAT OUTPUT (STRICT JSON HANYA TANPA PEMBUNGKUS TEKS LAIN):
+{{
+    "title": "Judul Panduan Lengkap dan Menarik di {sw}",
+    "softwareId": "{sw}",
+    "category": "Advance Tutorial",
+    "excerpt": "Ringkasan komprehensif 2-3 kalimat yang menjelaskan teknik mendalam {sw} yang akan dipelajari.",
+    "content": "<h2>Pendahuluan</h2><p>Isi panduan lengkap HTML 1200-1700 kata...</p>",
+    "source_url": "https://opentoonz.readthedocs.io/"
+}}
+"""
         try:
             response = client.models.generate_content(
                 model="gemini-3.6-flash",
