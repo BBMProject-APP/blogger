@@ -181,7 +181,7 @@ FORMAT OUTPUT (STRICT JSON HANYA TANPA PEMBUNGKUS TEKS LAIN):
   "excerpt": "Ringkasan komprehensif 2-3 kalimat yang menjelaskan teknik rigging/animasi Moho yang akan dipelajari.",
   "content": "<h1>...</h1><p>Isi panduan lengkap HTML 1200-1700 kata...</p>",
   "source_url": "https://moho.lostmarble.com/"
-})
+}}
 """
         try:
             response = client.models.generate_content(
@@ -200,7 +200,7 @@ FORMAT OUTPUT (STRICT JSON HANYA TANPA PEMBUNGKUS TEKS LAIN):
             blogger_url = post_to_blogger(
                 title=data.get("title"),
                 html_content=html_body,
-                custom_labels=["Moho", "Moho Pro", "Tutorial Longform", data.get("category", "Tutorial")]
+                custom_labels=["Moho", "Moho Pro", "Tutorial Longform", data.get("category", "Tutorial Moho")]
             )
             
             data["blogger_url"] = blogger_url or "-"
