@@ -139,32 +139,50 @@ def feed_tutorials():
     
     for sw in SOFTWARES:
         prompt = f"""
-        Buatlah 1 panduan tutorial tingkat lanjut yang SANGAT DETAIL dan MENDALAM untuk software animasi 2D 'Moho Pro' (Lost Marble Moho).
-        
-        SPESIFIKASI KONTEN (PENTING):
-        1. Seluruh isi konten HARUS ditulis dalam BAHASA INDONESIA profesional dan mudah dipahami.
-        2. Panjang artikel wajib berkisar antara 1200 hingga 1700 KATA (Long-form mega tutorial).
-        3. FOKUS FITUR MOHO: Pembahasan harus mendalam terkait fitur khas Moho seperti Smart Bones, Vector Rigging, Vitruvian Bones, Target Bones, Physics, atau Liquid Shapes.
-        4. Struktur artikel harus mencakup:
-           - Pendahuluan & Mengapa Teknik Ini Penting
-           - Persiapan Workspace & Rigging Tools
-           - Panduan Langkah demi Langkah Detail (Sub-heading '### Heading' untuk tiap fase)
-           - Pintasan Keyboard (Shortcuts) Penting di Moho
-           - Troubleshooting / Masalah Rigging & Animasi yang Sering Terjadi
-           - Tips Efisiensi Industri & Kesimpulan
-        5. HANYA keluarkan objek JSON mentah tanpa teks pembuka/penutup.
+Bertindaklah sebagai Senior 2D Animator, Moho Pro Expert, dan Technical Writer berpengalaman yang ramah, santai, dan pandai menjelaskan teknik rigging serta animasi kompleks secara rinci dan mudah dipahami.
 
-        Kembalikan JSON dengan format persis seperti ini:
+TOLONG BUATKAN 1 PANDUAN TUTORIAL ADVANCE / TINGKAT LANJUT SANGAT DETAIL:
+- Topik Utama: Tutorial mendalam software animasi 2D 'Moho Pro' (Lost Marble Moho).
+- Fokus Fitur: Pilih salah satu atau kombinasi fitur canggih Moho secara spesifik (misal: Smart Bones, Vector Rigging, Vitruvian Bones, Target Bones, Physics Engine, atau Liquid Shapes).
+- Target Pembaca: Animator 2D, rigger, profesional industri kreatif, atau pengguna Moho Pro tingkat menengah ke atas.
+- Panjang Konten: Wajib berkisar antara 1200 hingga 1700 KATA (Long-form mega tutorial).
 
-        {{
-            "title": "Judul Panduan Lengkap dan Menarik (contoh: Panduan Komprehensif Smart Bones & Head Turn Rigging di Moho Pro)",
-            "softwareId": "Moho Pro",
-            "category": "Advance Tutorial",
-            "excerpt": "Ringkasan komprehensif 2-3 kalimat yang menjelaskan teknik rigging/animasi Moho yang akan dipelajari.",
-            "content": "Isi panduan lengkap 1200-1700 kata dengan pembagian sub-heading '### Heading' dan paragraf yang jelas.",
-            "source_url": "https://moho.lostmarble.com/"
-        }}
-        """
+ATURAN GAYA PENULISAN & TONE:
+1. Panggilan Diri: Gunakan "Saya" atau "Gua" secara konsisten.
+2. Panggilan Pembaca: Gunakan "Lu" atau "Sob" / "Bro" agar terasa akrab namun tetap profesional.
+3. Gaya Bahasa: Edukatif, teknikal tapi santai, solutif, dan mudah diikuti step-by-step.
+4. JANGAN gunakan kata-kata kaku khas AI seperti: "Di era digital yang berkembang pesat ini", "Sangat krusial", "Kesimpulannya", "Dalam dunia animasi yang dinamis".
+
+ATURAN JUDUL & RINGKASAN:
+1. Judul: Clickable, to the point, memuat kata kunci spesifik Moho Pro (Maksimal 7-12 kata).
+2. Excerpt: Ringkasan menarik (2-3 kalimat / 120-150 karakter) yang menjelaskan teknik rigging/animasi yang akan dipelajari dan manfaatnya.
+
+ATURAN STRUKTUR & FORMAT HTML LENGKAP:
+Pada field 'content', wajib menyusun artikel dalam format HTML yang rapi (JANGAN gunakan Markdown raw). Gunakan tag HTML berikut secara tepat:
+- Tag <h2> dan <h3> untuk struktur section dan sub-fase.
+- Tag <p> untuk paragraf.
+- Tag <ul>, <ol>, dan <li> untuk daftar langkah atau fitur.
+- Tag <code> atau <kbd> untuk shortcut keyboard dan nama tool.
+- Tag <blockquote> untuk catatan penting, tips pro, atau peringatan.
+
+Struktur Artikel Wajib Memuat:
+1. Pendahuluan & Mengapa Teknik Ini Penting (Kenapa animator wajib kuasai fitur ini).
+2. Persiapan Workspace & Rigging Tools (Setup layer, vector prep).
+3. Panduan Langkah demi Langkah Detail (Bagi menjadi beberapa fase jelas pakai <h3>).
+4. Tabel / Daftar Pintasan Keyboard (Shortcuts) Penting di Moho Pro.
+5. Troubleshooting / Masalah Rigging & Animasi yang Sering Terjadi + Solusinya.
+6. Tips Efisiensi Industri & Penutup.
+
+FORMAT OUTPUT (STRICT JSON HANYA TANPA PEMBUNGKUS TEKS LAIN):
+{{
+  "title": "Judul Panduan Lengkap dan Menarik di Moho Pro",
+  "softwareId": "Moho Pro",
+  "category": "Advance Tutorial",
+  "excerpt": "Ringkasan komprehensif 2-3 kalimat yang menjelaskan teknik rigging/animasi Moho yang akan dipelajari.",
+  "content": "<h1>...</h1><p>Isi panduan lengkap HTML 1200-1700 kata...</p>",
+  "source_url": "https://moho.lostmarble.com/"
+})
+"""
         try:
             response = client.models.generate_content(
                 model="gemini-3.6-flash",
